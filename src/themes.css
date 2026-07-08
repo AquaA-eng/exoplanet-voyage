@@ -1,0 +1,119 @@
+/* ============================================================
+   THEMES — every color in the app lives here and nowhere else.
+   Components reference var(--x); the [data-theme] attribute on
+   <html> decides which set is active. Toggling themes = changing
+   one attribute. This is the whole trick.
+   ============================================================ */
+
+/* Field guide (light) — the default. Paper, ink, botanical calm. */
+:root,
+[data-theme='field-guide'] {
+  --bg: #faf7f0;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --border: #d5cfc0;
+  --border-soft: #e2ddd0;
+  --ink: #2c2a24;
+  --ink-secondary: #6b6555;
+  --ink-muted: #837a63;
+  --accent: #2c2a24;
+  --accent-contrast: #faf7f0;
+  --highlight: #5a7d5a;
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --radius: 4px;
+  --card-radius: 6px;
+}
+
+/* Deep space (dark) — toggled, or auto if system prefers dark. */
+[data-theme='deep-space'] {
+  --bg: #0a0e1a;
+  --surface: #10162a;
+  --surface-raised: #141a2e;
+  --border: #232d4d;
+  --border-soft: #1a2340;
+  --ink: #e8ecf8;
+  --ink-secondary: #a8b4d8;
+  --ink-muted: #8b97ba;
+  --accent: #3b5bdb;
+  --accent-contrast: #ffffff;
+  --highlight: #5bb98c;
+  --font-display: Georgia, 'Times New Roman', serif;
+  --font-body: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --radius: 12px;
+  --card-radius: 14px;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  transition: background 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input {
+  font-family: inherit;
+}
+
+/* Starfield only shows in deep-space theme */
+.starfield {
+  display: none;
+}
+[data-theme='deep-space'] .starfield {
+  display: block;
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+[data-theme='deep-space'] .star {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0.7;
+}
+
+/* Simple entrance animation for cards */
+@media (prefers-reduced-motion: no-preference) {
+  .card-enter {
+    animation: rise 0.4s ease both;
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+
+/* ============================================================
+   ACCESSIBILITY — visible keyboard focus everywhere
+   ============================================================ */
+button:focus-visible,
+input:focus-visible,
+[role='dialog'] button:focus-visible {
+  outline: 2px solid var(--highlight);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
