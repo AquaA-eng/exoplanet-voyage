@@ -5,8 +5,8 @@
    URL changes (local → Vercel), you change ONE line here.
    ============================================================ */
 
-const BASE_URL = 'http://127.0.0.1:8000'
-// After deploying: const BASE_URL = 'https://your-app.vercel.app'
+const BASE_URL = 'https://exoplanets-delta.vercel.app'
+// Local development: const BASE_URL = 'http://127.0.0.1:8000'
 
 async function get(path, params = {}) {
   const query = new URLSearchParams(
